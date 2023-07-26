@@ -3,17 +3,8 @@ package Helper
 import Data.AppDatabase
 import Data.MenuItemNetwork
 import Data.MenuNetwork
-import android.net.http.HttpResponseCache.install
-import my.littlelemon.Data.AppDatabase
-import my.littlelemon.Data.MenuItemNetwork
-import my.littlelemon.Data.MenuNetwork
-import io.ktor.client.*
-import io.ktor.client.call.*
-import io.ktor.client.engine.android.*
-import io.ktor.client.plugins.contentnegotiation.*
-import io.ktor.client.request.*
-import io.ktor.http.*
-import io.ktor.serialization.kotlinx.json.*
+import android.net.http.HttpResponseCache
+import java.io.File
 
 fun validateRegData(firstName:String, lastName: String, email: String): Boolean{
     var validated = false
@@ -29,12 +20,21 @@ fun validateRegData(firstName:String, lastName: String, email: String): Boolean{
 
 suspend fun fetchMenu(url: String): List<MenuItemNetwork> {
     val httpClient = HttpClient(Android){
+        val ContentNegotiation
         install(ContentNegotiation){
             json(contentType = ContentType("text", "plain"))
         }
     }
     val  httpResponse: MenuNetwork = httpClient.get(url).body()
     return httpResponse.items
+}
+
+fun json(contentType: Any) {
+
+}
+
+fun install(contentNegotiation: File?, function: () -> Unit): HttpResponseCache? {
+
 }
 
 

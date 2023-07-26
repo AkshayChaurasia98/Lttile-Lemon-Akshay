@@ -10,7 +10,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.NavHostController
 import com.example.littlelemon.ui.theme.LittleLemonTheme
 import composable.NavigationComposable
 
@@ -29,17 +28,18 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     val navController = rememberNavController()
-                    NavigationComposable(context = applicationContext,navController = navController)
+                    NavigationComposable(context = applicationContext, navController = navController)
                 }
             }
         }
     }
 
-    private fun rememberNavController(): NavHostController {
-    }
-}
+    private fun rememberNavController() {
 
-@Composable
+    }
+
+
+    @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     Text(
         text = "Hello $name!",
@@ -53,4 +53,4 @@ fun GreetingPreview() {
     LittleLemonTheme {
         Greeting("Android")
     }
-}
+}}

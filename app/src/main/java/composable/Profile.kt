@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
+import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -19,12 +20,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
 import com.example.littlelemon.ui.theme.PrimaryGreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Profile(context: Context, navHostController: NavHostController) {
+fun Profile(context: Context, navHostController: Unit) {
     val  sharedPreferences = context.getSharedPreferences("Little Lemon", Context.MODE_PRIVATE)
     val firstName = remember {
         mutableStateOf(sharedPreferences.getString("firstName", ""))
@@ -49,8 +49,9 @@ fun Profile(context: Context, navHostController: NavHostController) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(20.dp)) {
         Row(Modifier.fillMaxWidth(0.6f)) {
-            Image(painter = painterResource(id = R.drawble.logo),
-                contentDescription = "Little Lemon Logo")
+            Image(
+                painterResource(id = R.drawble.logo), "Little Lemon Logo"
+            )
         }
 
         Text(text = "Personal Information",
@@ -106,9 +107,9 @@ fun Profile(context: Context, navHostController: NavHostController) {
                 .clear()
                 .apply()
 
-            navHostController.navigate(Onboarding.route){
-                popUpTo(Home.route){inclusive = true}
-                launchSingleTop = true
+            navHostController.navigate(Onboarding().javaClass){
+                popUpTo(Home.route){ var inclusive = true }
+                var launchSingleTop = true
             }
 
         },
@@ -120,5 +121,13 @@ fun Profile(context: Context, navHostController: NavHostController) {
     }
 
 
+
+}
+
+private fun Any.navigate(route: Any, function: () -> Unit) {
+
+}
+
+fun popUpTo(route: Any, function: () -> Unit) {
 
 }

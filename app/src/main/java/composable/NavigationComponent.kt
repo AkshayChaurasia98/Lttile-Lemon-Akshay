@@ -4,32 +4,34 @@ import androidx.navigation.NavHost
 
 import android.content.Context
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import my.littlelemon.navigation.Home
-import my.littlelemon.navigation.Onboarding
-import my.littlelemon.navigation.Profile
-
 @Composable
-fun NavigationComposable(context: Context,navController: NavHostController) {
+fun NavigationComposable(context: Context, navController: Unit) {
 
     val sharedPreferences = context.getSharedPreferences("Little Lemon", Context.MODE_PRIVATE)
-    var startDestination = Onboarding.route
+    var startDestination = Onboarding().route
 
     if (sharedPreferences.getBoolean("userRegistered", false)) {
         startDestination = Home.route
     }
 
     NavHost(navController = navController, startDestination = startDestination){
-        composable(Onboarding.route){
+        composable(Onboarding().route){
             Onboarding(context, navController)
         }
         composable(Home.route){
             Home(navController)
         }
-        composable(Profile.route){
+        composable(Profile().route){
             Profile(context, navController)
         }
     }
+}
+
+fun composable(route: Any, function: () -> Unit) {
+
+}
+
+fun Onboarding() {
+    TODO("Not yet implemented")
 }

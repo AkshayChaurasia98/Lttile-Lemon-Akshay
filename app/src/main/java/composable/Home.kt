@@ -13,6 +13,7 @@ import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -89,7 +90,7 @@ class Home {
 
             Box(modifier = Modifier
                 .size(50.dp)
-                .clickable { navController.navigate(Profile.route) }) {
+                .clickable { navController.navigate(Profile().route) }) {
                 Icon(
                     imageVector = Icons.Default.AccountCircle,
                     contentDescription = "Profile Icon",
@@ -105,6 +106,7 @@ class Home {
     }
 
 
+    @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     fun UpperPanel(search: (parameter: String) -> Unit) {
         val searchPhrase = remember {
